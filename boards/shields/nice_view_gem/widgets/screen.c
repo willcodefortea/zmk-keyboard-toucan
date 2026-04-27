@@ -10,7 +10,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
 #include <zmk/events/layer_state_changed.h>
-#include <zmk/events/modifiers_state_changed.h>
+#include <zmk/events/keycode_state_changed.h>
 #include <zmk/events/usb_conn_state_changed.h>
 #include <zmk/events/wpm_state_changed.h>
 #include <zmk/battery.h>
@@ -187,7 +187,7 @@ static struct modifiers_status_state modifiers_status_get_state(const zmk_event_
 ZMK_DISPLAY_WIDGET_LISTENER(widget_modifiers_status, struct modifiers_status_state,
                             modifiers_status_update_cb, modifiers_status_get_state);
 
-ZMK_SUBSCRIPTION(widget_modifiers_status, zmk_modifiers_state_changed);
+ZMK_SUBSCRIPTION(widget_modifiers_status, zmk_keycode_state_changed);
 
 /**
  * Output status
