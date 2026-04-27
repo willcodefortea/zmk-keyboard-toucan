@@ -13,8 +13,8 @@
 #define MOD_ALT_MASK 0x44 /* MOD_LALT | MOD_RALT */
 #define MOD_GUI_MASK 0x88 /* MOD_LGUI | MOD_RGUI */
 
-static const char *mod_labels[] = {"C", "S", "A", "G"};
-static const uint8_t mod_masks[] = {MOD_CTL_MASK, MOD_SFT_MASK, MOD_ALT_MASK, MOD_GUI_MASK};
+static const char *mod_labels[] = {"C", "A", "G", "S"};
+static const uint8_t mod_masks[] = {MOD_CTL_MASK, MOD_ALT_MASK, MOD_GUI_MASK, MOD_SFT_MASK};
 
 static void draw_box_outline(lv_obj_t *canvas, int x, int y, int w, int h) {
     lv_draw_rect_dsc_t rect_dsc;
