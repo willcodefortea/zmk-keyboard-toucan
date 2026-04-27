@@ -10,6 +10,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
 #include <zmk/events/layer_state_changed.h>
+#include <zmk/events/modifiers_state_changed.h>
 #include <zmk/events/usb_conn_state_changed.h>
 #include <zmk/events/wpm_state_changed.h>
 #include <zmk/battery.h>
@@ -17,6 +18,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/display.h>
 #include <zmk/display/widgets/battery_status.h>
 #include <zmk/endpoints.h>
+#include <zmk/hid.h>
 #include <zmk/keymap.h>
 #include <zmk/usb.h>
 #include <zmk/split/central.h>
@@ -24,6 +26,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "battery.h"
 #include "battery_peripheral.h"
 #include "layer.h"
+#include "modifiers.h"
 #include "output.h"
 #include "profile.h"
 #include "screen.h"
@@ -51,6 +54,7 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     // Draw widgets
     draw_output_status(canvas, state);
     draw_layer_status(canvas, state);
+    draw_modifiers_status(canvas, state);
     draw_profile_status(canvas, state);
     draw_battery_status(canvas, state);
     draw_battery_peripheral_status(canvas, state);
@@ -158,6 +162,34 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_status, struct layer_status_state, laye
 ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
 
 /**
+ * Modifier status
+ **/
+
+static void set_modifiers_status(struct zmk_widget_screen *widget,
+                                 struct modifiers_status_state state) {
+    widget->state.modifiers = zmk_hid_get_explicit_mods();
+    draw_top(widget->obj, widget->cbuf, &widget->state);
+}
+
+static void modifiers_status_update_cb(struct modifiers_status_state state) {
+    struct zmk_widget_screen *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        set_modifiers_status(widget, state);
+    }
+}
+
+static struct modifiers_status_state modifiers_status_get_state(const zmk_event_t *eh) {
+    return (struct modifiers_status_state){
+        .modifiers = zmk_hid_get_explicit_mods(),
+    };
+}
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_modifiers_status, struct modifiers_status_state,
+                            modifiers_status_update_cb, modifiers_status_get_state);
+
+ZMK_SUBSCRIPTION(widget_modifiers_status, zmk_modifiers_state_changed);
+
+/**
  * Output status
  **/
 
@@ -252,6 +284,7 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget_battery_status_init();
     widget_battery_peripheral_status_init();
     widget_layer_status_init();
+    widget_modifiers_status_init();
     widget_output_status_init();
 
     return 0;
