@@ -49,7 +49,14 @@
         };
     };
 
-    combos { compatible = "zmk,combos"; };
+    combos {
+        compatible = "zmk,combos";
+
+        escape {
+            bindings = <&kp ESCAPE>;
+            key-positions = <19 20>;
+        };
+    };
 
     keymap {
         compatible = "zmk,keymap";
