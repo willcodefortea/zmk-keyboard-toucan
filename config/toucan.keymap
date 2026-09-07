@@ -66,7 +66,7 @@
         base {
             display-name = "BASE";
             bindings = <
-&kp ESCAPE  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC  &kp LCTRL  &hrml LEFT_CONTROL A  &hrml LEFT_ALT S  &hrml LEFT_GUI D  &hrml LSHIFT F  &kp G  &kp H  &hrmr RSHIFT J  &hrmr RIGHT_GUI K  &hrmr RIGHT_ALT L  &hrmr RIGHT_CONTROL SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &none  &kp LGUI  &kp SPACE  &lt 1 TAB  &lt 2 ENTER  &kp BACKSPACE  &kp RALT
+&kp ESCAPE  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC  &kp LCTRL  &hrml LEFT_CONTROL A  &hrml LEFT_ALT S  &hrml LEFT_GUI D  &hrml LSHIFT F  &kp G  &kp H  &hrmr RSHIFT J  &hrmr RIGHT_GUI K  &hrmr RIGHT_ALT L  &hrmr RIGHT_CONTROL SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &none  &kp LGUI  &kp SPACE  &lt 1 TAB  &lt 2 ENTER  &kp BACKSPACE  &sk LEFT_SHIFT
             >;
         };
 
@@ -94,6 +94,7 @@
         // Momentarily active while a finger is on the trackpad (see is_touching_processor
         // in toucan.dtsi). Turns the thumb keys into mouse buttons so you can click without
         // lifting off the pad. All other keys pass through to the layer below.
+
         mouse {
             display-name = "MOU";
             bindings = <
