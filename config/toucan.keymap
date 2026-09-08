@@ -61,6 +61,7 @@
         // quick-tap-ms is what restores held-delete: a re-press inside the window forces
         // the tap branch, and a hold-tap's tap keycode stays down until release, so the
         // host autorepeats it. Tap delete, then press and hold again to repeat.
+
         shift_bspc: shift_bspc {
             compatible = "zmk,behavior-hold-tap";
             label = "SHIFT_BSPC";
@@ -88,14 +89,14 @@
         base {
             display-name = "BASE";
             bindings = <
-&kp ESCAPE  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC  &kp LCTRL  &kp A  &hrml LEFT_CONTROL S  &hrml LEFT_ALT D  &hrml LEFT_GUI F  &kp G  &kp H  &hrmr RIGHT_GUI J  &hrmr RIGHT_ALT K  &hrmr RIGHT_CONTROL L  &kp SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &none  &kp LGUI  &kp SPACE  &lt 1 TAB  &lt 2 ENTER  &shift_bspc LEFT_SHIFT BACKSPACE  &sk LEFT_SHIFT
+&kp ESCAPE  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC  &kp LCTRL  &kp A  &hrml LEFT_CONTROL S  &hrml LEFT_ALT D  &hrml LEFT_GUI F  &kp G  &kp H  &hrmr RIGHT_GUI J  &hrmr RIGHT_ALT K  &hrmr RIGHT_CONTROL L  &kp SEMI  &kp SQT  &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &none  &kp LGUI  &mt LEFT_SHIFT SPACE  &lt 1 TAB  &lt 2 ENTER  &shift_bspc LEFT_SHIFT BACKSPACE  &sk LEFT_SHIFT
             >;
         };
 
         nav {
             display-name = "NAV";
             bindings = <
-&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  &kp LEFT_SHIFT  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp RALT
+&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &trans  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp RALT
             >;
         };
 
