@@ -83,11 +83,32 @@
         cmd_num: cmd_num {
             compatible = "zmk,behavior-hold-tap";
             label = "CMD_NUM";
-            bindings = <&kp>, <&kp>;
+            bindings = <&cmd_digit>, <&kp>;
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
+        };
+    };
+
+    macros {
+        // Hold half of cmd_num. Sending LG(N1) puts Cmd and the digit in one HID
+        // report, and macOS apps (T3 Code, Slack) then saw Cmd but dropped the
+        // digit: their Cmd-hold labels appeared and the jump never fired. Pressing
+        // Cmd first and tapping the digit a moment later matches a real keyboard.
+        // Cmd stays down until the key is released.
+
+        cmd_digit: cmd_digit {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_wait_time 30>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_pause_for_release>
+                , <&macro_release &kp LGUI>
+                ;
         };
     };
 
@@ -113,7 +134,7 @@
         nav {
             display-name = "NAV";
             bindings = <
-&trans  &cmd_num LG(N1) N1  &cmd_num LG(N2) N2  &cmd_num LG(N3) N3  &cmd_num LG(N4) N4  &cmd_num LG(N5) N5  &cmd_num LG(N6) N6  &cmd_num LG(N7) N7  &cmd_num LG(N8) N8  &cmd_num LG(N9) N9  &cmd_num LG(N0) N0  &trans  &trans  &trans  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &shift_bspc LEFT_GUI BACKSPACE  &kp RALT
+&trans  &cmd_num N1 N1  &cmd_num N2 N2  &cmd_num N3 N3  &cmd_num N4 N4  &cmd_num N5 N5  &cmd_num N6 N6  &cmd_num N7 N7  &cmd_num N8 N8  &cmd_num N9 N9  &cmd_num N0 N0  &trans  &trans  &trans  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &shift_bspc LEFT_GUI BACKSPACE  &kp RALT
             >;
         };
 
