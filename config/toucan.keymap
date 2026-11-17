@@ -73,6 +73,22 @@
             quick-tap-ms = <200>;
             flavor = "balanced";
         };
+
+        // Nav number row: tap for the digit, hold for Cmd+digit. Cmd+number needs no
+        // third key held, just the nav thumb and one finger, same as typing the digit.
+        //
+        // tap-preferred so only time decides: digits are typed in fast runs, and a
+        // roll onto the next digit must never turn the previous one into Cmd+digit.
+
+        cmd_num: cmd_num {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CMD_NUM";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
     };
 
     combos {
@@ -97,7 +113,7 @@
         nav {
             display-name = "NAV";
             bindings = <
-&trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans  &trans  &trans  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &shift_bspc LEFT_GUI BACKSPACE  &kp RALT
+&trans  &cmd_num LG(N1) N1  &cmd_num LG(N2) N2  &cmd_num LG(N3) N3  &cmd_num LG(N4) N4  &cmd_num LG(N5) N5  &cmd_num LG(N6) N6  &cmd_num LG(N7) N7  &cmd_num LG(N8) N8  &cmd_num LG(N9) N9  &cmd_num LG(N0) N0  &trans  &trans  &trans  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &caps_word  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &kp C_AC_HOME  &kp PAGE_DOWN  &kp PAGE_UP  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &shift_bspc LEFT_GUI BACKSPACE  &kp RALT
             >;
         };
 
